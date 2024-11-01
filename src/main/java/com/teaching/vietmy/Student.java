@@ -56,7 +56,7 @@ public class Student {
     }
 
      public boolean validateId() {
-        return this.id != null && this.id.matches("vm-\\d{4}");
+        return this.id != null && this.id.matches("VM-\\d{4}");
     }
 
     public boolean validateName() {

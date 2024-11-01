@@ -4,8 +4,7 @@
  */
 package com.teaching.vietmy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author npvlo
  */
 public class Manage {
-    private Map<String, Student> students;
+    private final Map<String, Student> students;
 
     public Manage() {
         students = new ConcurrentHashMap<>();
@@ -23,7 +22,8 @@ public class Manage {
     public void add(String name, String className, int age, String id){
         Student student = new Student(name, age, className, id);
         validateObj(student);
-        
+        checkIfDuplicate(id);
+        students.put(id, student);
     }
     
     private void validateObj(Student student){
@@ -38,7 +38,26 @@ public class Manage {
             throw new RuntimeException("Duplicate Id");
     }
     
-    public void remove(){
-        
+    public void remove(String id){
+        students.remove(id);
+    }
+    
+    public Collection<Student> getAll(){
+        return students.values();
+    }
+    
+
+    public Student getById(String id){
+        return students.get(id);
+    }
+    
+    public Student update(String id, String name, String className, int age){
+        Student student = getById(id);
+        if(student == null) return null;
+        student.setAge(age);
+        student.setClassName(className);
+        student.setName(name);
+        students.put(id, student);
+        return student;
     }
 }
