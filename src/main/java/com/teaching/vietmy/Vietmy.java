@@ -11,6 +11,7 @@ package com.teaching.vietmy;
 public class Vietmy {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Student stu = new Student("John", 18, "Testing", "VM-12345");
+        System.out.println(stu.toString());
     }
 }
